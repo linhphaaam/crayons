@@ -2,6 +2,7 @@ click==7.1.2
 dominate==2.6.0
 Flask==1.1.2
 Flask-Bootstrap==3.3.7.1
+gunicorn==20.0.4
 itsdangerous==1.1.0
 Jinja2==2.11.2
 MarkupSafe==1.1.1
