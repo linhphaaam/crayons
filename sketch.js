@@ -12,7 +12,7 @@ let fontsize = 32;
 let speech_history = [];
 
 var w = 1024;
-var h = 800;
+var h = 768;
 
 function preload(){
   // load the shader
@@ -123,18 +123,35 @@ function draw() {
 
         vertex_dict_shuffled = shuffle(vertex_dict);
 
-        contour_img.beginShape();
+        // contour_img.beginShape();
+
         for (var v = 0; v < vertex_dict_shuffled.length; v+=20) {
-          contour_img.stroke(random(crayon_colors)[0], random(crayon_colors)[1], random(crayon_colors)[2]);
-          contour_img.curveVertex(vertex_dict_shuffled[v][0], vertex_dict_shuffled[v][1]);
+          let counter = 0;
+          contour_img.beginShape();
+          for (var t = 0; t < vertex_dict_shuffled.length; t+=1) {
+            let v1 = createVector(vertex_dict_shuffled[v][0], vertex_dict_shuffled[v][1]);
+            let v2 = createVector(vertex_dict_shuffled[t][0], vertex_dict_shuffled[t][1]);
+            // console.log(v1);
+            if (v1.dist(v2) < 120) {
+              contour_img.stroke(random(crayon_colors)[0], random(crayon_colors)[1], random(crayon_colors)[2]);
+              contour_img.curveVertex(vertex_dict_shuffled[t][0], vertex_dict_shuffled[t][1]); 
+              counter++ 
+              if (counter > 15) {
+                break;
+              }
+            }
+          }
+          contour_img.endShape(CLOSE);
+          // contour_img.stroke(random(crayon_colors)[0], random(crayon_colors)[1], random(crayon_colors)[2]);
+          // contour_img.curveVertex(vertex_dict_shuffled[v][0], vertex_dict_shuffled[v][1]);
         }
-        contour_img.endShape(CLOSE);
+        // contour_img.endShape(CLOSE);
 
         contour_img.stroke(80, 25, 24);
         contour_img.beginShape();
-        for (var v = 0; v < vertex_dict.length; v+=10) {
+        for (var v = 0; v < vertex_dict.length; v+=5) {
           // randomSeed(v);                       
-          // contour_img.stroke(random(crayon_colors)[0], random(crayon_colors)[1], random(crayon_colors)[2]);
+          contour_img.stroke(random(crayon_colors)[0], random(crayon_colors)[1], random(crayon_colors)[2]);
           contour_img.curveVertex(vertex_dict[v][0], vertex_dict[v][1]);
         }        
         contour_img.endShape(CLOSE);
@@ -149,7 +166,7 @@ function draw() {
     contour_img.textSize(random(40,100));
     contour_img.fill(random_col);
     contour_img.stroke(random_col);
-    contour_img.text(speech_history[i].toUpperCase(), random(w/1.5), random(h), 300, 400);
+    contour_img.text(speech_history[i].toUpperCase(), random(5/6*w), random(3/4*h), 300, 400);
   }
  
 
