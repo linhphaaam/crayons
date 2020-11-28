@@ -12,10 +12,7 @@ uniform vec2 u_resolution;
 uniform float u_time;
 uniform vec2 u_mouse;
 uniform sampler2D rockImg;
-uniform sampler2D lineImg;
-uniform sampler2D faceImg;
 uniform sampler2D contourImg;
-uniform sampler2D textImg;
 uniform sampler2D camera;
 
 // this is the same variable we declared in the vertex shader
