@@ -11,8 +11,8 @@ let lang;
 let fontsize = 32;
 let speech_history = [];
 
-var w = 1024;
-var h = 768;
+var w = 1200;
+var h = 900;
 
 function preload(){
   // load the shader
@@ -68,7 +68,8 @@ function cvReady() {
 
 
 function draw() {  
-  contour_img.background(224,220,217);
+  // contour_img.background(224,220,217);
+  contour_img.background(24,20,17);
   
   if (cvReady()) {
     capture.loadPixels();  
@@ -180,9 +181,9 @@ function draw() {
   theShader.setUniform('camera', capture);
 
   // rect gives us some geometry on the screen
-  rect(0,0,width, height);
+  rect(0,0, w, h);
 }
 
-function windowResized(){
-  resizeCanvas(windowWidth, windowHeight);
-}
+// function windowResized(){
+//   resizeCanvas(windowWidth, windowHeight);
+// }
