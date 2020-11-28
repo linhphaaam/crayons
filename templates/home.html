@@ -1,0 +1,48 @@
+{% extends "bootstrap/base.html" %}
+{% block title %} Crayons CV {% endblock title %}
+
+{% block head %}
+{{ super() }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.js"></script>
+<script async src={{ url_for('send_static', path='cv.js') }}></script>
+<script src={{ url_for('send_static', path='p5.speech.js') }}></script>
+<!-- <script src={{ url_for('send_static', path='sketch.js') }}></script> -->
+<p>OpenCV Status: <span id="status">Loading OpenCV...</span></p>
+    <script>
+      window.Module = {
+          loaded: false,
+          print: console.log,
+          printErr: function(text) {
+              document.getElementById('status').innerHTML = text;
+              console.error(text);
+          },
+          setStatus: function(text) {
+              document.getElementById('status').innerHTML = text;
+              console.log(text);
+          },
+          onRuntimeInitialized: function() {
+              document.getElementById('status').innerHTML = 'Loaded';
+              this.loaded = true;
+              // it would be better if we created the sketch at this point
+          }
+      };
+  </script>
+{% endblock head %}
+
+{% block content %}
+<script src={{ url_for('send_static', path='sketch.js') }}></script>
+<div class="container"></div>
+    <body>
+        <header>
+        <h1>
+        Crayons
+        </h1>
+        </header>    
+        <p>Blur Radius: <input type="range" id="blurRadius" value="50"></p>
+        <p>Threshold: <input type="range" id="threshold" value="35"></p>
+        <div id="canvasHolder" align="center">
+        </div>
+    </body>
+</div>
+{% endblock content %}
