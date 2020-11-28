@@ -16,7 +16,7 @@ var h = 900;
 
 function preload(){
   // load the shader
-  theShader = loadShader('shader.vert', 'shader.frag');
+  theShader = loadShader('static/shader.vert', 'static/shader.frag');
   rock_img = loadImage('assets/rock.jpg');
 }
 

@@ -5,8 +5,13 @@
 {{ super() }}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.js"></script>
+<script src={{ url_for('send_static', path='sketch.js') }}></script>
 <script async src={{ url_for('send_static', path='cv.js') }}></script>
 <script src={{ url_for('send_static', path='p5.speech.js') }}></script>
+<script src={{ url_for('send_assets', path='rock.jpg') }}></script>
+<script src={{ url_for('send_static', path='cv.data') }}></script>
+<script src={{ url_for('send_static', path='shader.vert') }}></script>
+<script src={{ url_for('send_static', path='shader.frag') }}></script>
 <!-- <script src={{ url_for('send_static', path='sketch.js') }}></script> -->
 <p>OpenCV Status: <span id="status">Loading OpenCV...</span></p>
     <script>
@@ -31,7 +36,6 @@
 {% endblock head %}
 
 {% block content %}
-<script src={{ url_for('send_static', path='sketch.js') }}></script>
 <div class="container"></div>
     <body>
         <header>
