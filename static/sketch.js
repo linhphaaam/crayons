@@ -41,6 +41,12 @@ function setup() {
   capture.hide();
 }
 
+
+// once the record ends or an error happens, start() again. this should keep it going
+function restart(){
+	speechRec.start();
+}
+
 function gotSpeech() {
   speech_history.push(speechRec.resultString);
 }
@@ -68,16 +74,41 @@ function cvReady() {
 
 
 function draw() {  
-  // contour_img.background(224,220,217);
+  speechRec.onEnd = restart;
   contour_img.background(24,20,17);
+  // get outline color selections
+  var outline_color_colorful = document.getElementById("colorful_outline").checked;
+  var outline_color_black = document.getElementById("black_outline").checked;
+  var outline_color_white = document.getElementById("white_outline").checked;
+
+  // get clear text button
+  var clear_text_button = document.getElementById("clear_text_button");
+
+  clear_text_button.onclick = function() {
+    speech_history = [];
+  }
+
+  var body = document.getElementById("screen");
+  var background_switch_value = document.getElementById("background_switch").checked;
+
+  if (background_switch_value == false) {
+    body.style.backgroundColor = "rgb(24,20,17)";
+    body.style.color = "rgb(251,245,237)";
+    contour_img.background(24,20,17);
+  } else {
+    body.style.backgroundColor = "rgb(251,245,237)";
+    body.style.color = "rgb(24,20,17)";
+    contour_img.background(251,245,237);
+  }
   
   if (cvReady()) {
     capture.loadPixels();  
     if (pixels.length > 0) {
       captureMat.data().set(pixels);
 
-      var blurRadius = select('#blurRadius').value();
-      blurRadius = map(blurRadius, 0, 100, 1, 10);
+      // var blurRadius = select('#blurRadius').value();
+      // blurRadius = map(blurRadius, 0, 100, 1, 10);
+      var blurRadius = 5;
 
       var threshold = select('#threshold').value();
       threshold = map(threshold, 0, 100, 0, 255);
@@ -119,13 +150,12 @@ function draw() {
         for (var j = 0; j < contour.total(); j++) {
             var x = contour.get_int_at(k++);
             var y = contour.get_int_at(k++);
-            vertex_dict[j] = [x,y];
+            vertex_dict[j] = [-x+capture.width,y];
         }     
 
         vertex_dict_shuffled = shuffle(vertex_dict);
 
         // contour_img.beginShape();
-
         for (var v = 0; v < vertex_dict_shuffled.length; v+=20) {
           let counter = 0;
           contour_img.beginShape();
@@ -152,7 +182,14 @@ function draw() {
         contour_img.beginShape();
         for (var v = 0; v < vertex_dict.length; v+=5) {
           // randomSeed(v);                       
-          contour_img.stroke(random(crayon_colors)[0], random(crayon_colors)[1], random(crayon_colors)[2]);
+          // contour_img.stroke(random(crayon_colors)[0], random(crayon_colors)[1], random(crayon_colors)[2]);
+          if (outline_color_white) {
+          contour_img.stroke(251,245,237); // light outline
+          } else if (outline_color_black) {
+          contour_img.stroke(24,20,17); // dark outline
+          } else if (outline_color_colorful) {
+            contour_img.stroke(random(crayon_colors)[0], random(crayon_colors)[1], random(crayon_colors)[2]); // colorful outline
+          }
           contour_img.curveVertex(vertex_dict[v][0], vertex_dict[v][1]);
         }        
         contour_img.endShape(CLOSE);
@@ -184,6 +221,6 @@ function draw() {
   rect(0,0, w, h);
 }
 
-// function windowResized(){
-//   resizeCanvas(windowWidth, windowHeight);
-// }
+function windowResized(){
+  resizeCanvas(windowWidth*0.7, (windowWidth*0.7)*3/4, [noRedraw]);
+}

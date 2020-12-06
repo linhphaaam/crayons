@@ -12,22 +12,23 @@
 <script src={{ url_for('send_static', path='cv.data') }}></script>
 <script src={{ url_for('send_static', path='shader.vert') }}></script>
 <script src={{ url_for('send_static', path='shader.frag') }}></script>
+<link rel="stylesheet" href={{ url_for('send_static', path='style.css') }}>
 <!-- <script src={{ url_for('send_static', path='sketch.js') }}></script> -->
-<p>OpenCV Status: <span id="status">Loading OpenCV...</span></p>
+<!-- <p class="opencv_status">OpenCV Status: <span class="opencv_status" id="status">Loading OpenCV...</span></p> -->
     <script>
       window.Module = {
           loaded: false,
           print: console.log,
           printErr: function(text) {
-              document.getElementById('status').innerHTML = text;
+            //   document.getElementById('status').innerHTML = text;
               console.error(text);
           },
-          setStatus: function(text) {
-              document.getElementById('status').innerHTML = text;
-              console.log(text);
-          },
+        //   setStatus: function(text) {
+        //       document.getElementById('status').innerHTML = text;
+        //       console.log(text);
+        //   },
           onRuntimeInitialized: function() {
-              document.getElementById('status').innerHTML = 'Loaded';
+            //   document.getElementById('status').innerHTML = 'Loaded';
               this.loaded = true;
               // it would be better if we created the sketch at this point
           }
@@ -37,15 +38,51 @@
 
 {% block content %}
 <div class="container"></div>
-    <body>
+    <body id="screen">
         <header>
-        <h1>
-        Crayons
-        </h1>
-        </header>    
-        <p>Blur Radius: <input type="range" id="blurRadius" value="50"></p>
-        <p>Threshold: <input type="range" id="threshold" value="35"></p>
-        <div id="canvasHolder" align="center">
+            <h1>
+            CRAYONS
+            </h1>
+        </header>
+        <div class=flex-container>
+            <div class="controls">   
+            <!-- <p>Blur Radius: <input type="range" id="blurRadius" value="50"></p> -->
+                <div id="threshold_control">
+                    <h2>Threshold</h2>
+                    <input type="range" id="threshold" value="35">
+                </div>
+                <div id="canvas_bg_control">
+                    <h2>Canvas background</h2>
+                    <h3>Dark
+                        <label class="switch">
+                        <input type="checkbox" id="background_switch">
+                        <span class="slider round"></span>
+                    </label>  Light</h3>
+                </div>
+                <div id="outline_color_control">
+                    <h2>Outline color</h2>
+                    <div>
+                    <input type="radio" id="colorful_outline" name="color" value="colorful"
+                            checked>
+                    <label for="colorful_outline">Colorful</label>
+                    </div>
+
+                    <div>
+                    <input type="radio" id="black_outline" name="color" value="black">
+                    <label for="black_outline">Black</label>
+                    </div>
+
+                    <div>
+                    <input type="radio" id="white_outline" name="color" value="white">
+                    <label for="white_outline">White</label>
+                    </div>
+                </div>
+                <div id="clear_text_button">
+                    <button type="button">Clear text</button>
+                </div>
+            </div> 
+            <div id="canvasHolder" align="center">
+        </div>
         </div>
     </body>
 </div>
