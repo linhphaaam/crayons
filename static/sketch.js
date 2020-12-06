@@ -7,9 +7,16 @@ let contour_img;
 
 let speechRec;
 let lang;
+let continuous = true;
+let interim = false;
+
+let body;
+let color_picker;
 
 let fontsize = 32;
 let speech_history = [];
+
+let color_picked = false;
 
 var w = 1200;
 var h = 900;
@@ -29,10 +36,7 @@ function setup() {
   noStroke();
   lang = navigator.language || 'en-US';
   speechRec = new p5.SpeechRec(lang, gotSpeech);
-  let continuous = true;
-  let interim = false;
   speechRec.start(continuous, interim);
-
   capture = createCapture(VIDEO);
   capture.size(w, h);
   contour_img = createGraphics(capture.width, capture.height);
@@ -44,7 +48,7 @@ function setup() {
 
 // once the record ends or an error happens, start() again. this should keep it going
 function restart(){
-	speechRec.start();
+	speechRec.start(continuous, interim);
 }
 
 function gotSpeech() {
@@ -73,6 +77,26 @@ function cvReady() {
 }
 
 
+function hexToRGB(h) {
+  let r = 0, g = 0, b = 0;
+
+  // 3 digits
+  if (h.length == 4) {
+    r = "0x" + h[1] + h[1];
+    g = "0x" + h[2] + h[2];
+    b = "0x" + h[3] + h[3];
+
+  // 6 digits
+  } else if (h.length == 7) {
+    r = "0x" + h[1] + h[2];
+    g = "0x" + h[3] + h[4];
+    b = "0x" + h[5] + h[6];
+  }
+  
+  // return r + "," + g + "," + b;
+  return r.toString() + "," + g.toString() + "," + b.toString();
+}
+
 function draw() {  
   speechRec.onEnd = restart;
   contour_img.background(24,20,17);
@@ -87,20 +111,39 @@ function draw() {
   clear_text_button.onclick = function() {
     speech_history = [];
   }
-
-  var body = document.getElementById("screen");
-  var background_switch_value = document.getElementById("background_switch").checked;
-
-  if (background_switch_value == false) {
-    body.style.backgroundColor = "rgb(24,20,17)";
-    body.style.color = "rgb(251,245,237)";
-    contour_img.background(24,20,17);
-  } else {
-    body.style.backgroundColor = "rgb(251,245,237)";
-    body.style.color = "rgb(24,20,17)";
-    contour_img.background(251,245,237);
+  take_screenshot.onclick = function() {
+    saveCanvas('myCanvas', 'jpg');
   }
+  body = document.getElementById("screen");
+
+
+  // get background color picker
+  // var background_switch_value = document.getElementById("background_switch").checked;
+
+
+  color_picker = document.getElementById("color_picker");
+
+  color_picker.oninput = function() {
+    color_picked = true;
+    return true;
+  }
+
+  // if (background_switch_value == false) {
+  //   body.style.backgroundColor = "rgb(24,20,17)";
+  //   body.style.color = "rgb(251,245,237)";
+  //   contour_img.background(24,20,17);
+  // } else {
+  //   body.style.backgroundColor = "rgb(251,245,237)";
+  //   body.style.color = "rgb(24,20,17)";
+  //   contour_img.background(251,245,237);
+  // } 
   
+  if (color_picked) {
+    // body.style.backgroundColor = color_picker.value;
+    contour_img.background(color_picker.value);
+  }
+
+
   if (cvReady()) {
     capture.loadPixels();  
     if (pixels.length > 0) {
@@ -222,5 +265,5 @@ function draw() {
 }
 
 function windowResized(){
-  resizeCanvas(windowWidth*0.7, (windowWidth*0.7)*3/4, [noRedraw]);
+  resizeCanvas(windowWidth*0.7, (windowWidth*0.7)*3/4);
 }

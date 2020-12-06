@@ -12,26 +12,67 @@ button {
     padding: 12px;
     border-radius: 5px;
     background-color: indianred;
-    font-size: 30px;
+    font-size: 24px;
     position: relative;
     color: rgb(224,220,217);
 }
 
+
+input[type="color"] {
+	-webkit-appearance: none;
+	border: none;
+	width: 60%;
+    height: 32px;
+    margin-top: 10px;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: none;
+}
+
 #clear_text_button {
-    background-color: none;
+    padding-top: 15px;
+    background-color: rgb(224,220,217, 0); !important;
+    border: none !important;
+}
+
+#take_screenshot > button {
+    background-color: cornflowerblue;
+}
+#take_screenshot {
+    background-color: rgb(224,220,217, 0); !important;
+    border: none !important;
 }
 
 p {
-    font-size: 24px;
+    font-size: 18px;
 }
 
 h1 {
     font-size: 48px;
+    font-weight: 600;
+}
+
+
+h2 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 24px;
+    font-weight: 500;
+    opacity: 0.9;
 }
 
 label {
+    margin-left: 5px;
+    margin-right: 5px;
     font-size: 24px;
     font-weight: 500;
+    opacity: 0.9;
 }
 
 header {
@@ -39,7 +80,7 @@ header {
 }
 
 #threshold {
-    width: 300px;
+    width: 100%;
 }
 
 #status #opencv_status {
@@ -48,7 +89,7 @@ header {
 
 .flex-container {
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     /* justify-content: center; */
 }
 
@@ -63,6 +104,8 @@ header {
 
 .controls {
     display: inline-block;
+    width: 20%;
+    min-width: 300px;
     
     /* background-color: rgb(250, 235, 215, 0.1); */
 }
@@ -71,7 +114,7 @@ header {
     padding: 5px 20px 15px 20px;
     margin-bottom: 10px;
     border-radius: 5px;
-    border: solid 0.5px rgb(128, 128, 128, 0.5);
+    border: solid 0.5px rgba(255, 255, 255, 0.5);
     background-color: rgb(255, 255, 255, 0.1);
 
 }

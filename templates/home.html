@@ -41,8 +41,9 @@
     <body id="screen">
         <header>
             <h1>
-            CRAYONS
+            CRAYONS 🖍️
             </h1>
+            <p>Please enable camera and microphone to start sketching.</p>
         </header>
         <div class=flex-container>
             <div class="controls">   
@@ -53,11 +54,12 @@
                 </div>
                 <div id="canvas_bg_control">
                     <h2>Canvas background</h2>
-                    <h3>Dark
+                    <!-- <h3>Dark
                         <label class="switch">
                         <input type="checkbox" id="background_switch">
                         <span class="slider round"></span>
-                    </label>  Light</h3>
+                    </label>  Light</h3> -->
+                    <input type="color" id="color_picker" name="color_picker" value="#181411"><br>
                 </div>
                 <div id="outline_color_control">
                     <h2>Outline color</h2>
@@ -80,6 +82,11 @@
                 <div id="clear_text_button">
                     <button type="button">Clear text</button>
                 </div>
+                <div id="take_screenshot">
+                    <button type="button">Take a Screenshot</button>
+                </div>
+                <hr>
+                <h3>Psst. Try saying something :)</h3>
             </div> 
             <div id="canvasHolder" align="center">
         </div>
