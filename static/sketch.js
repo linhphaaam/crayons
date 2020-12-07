@@ -284,4 +284,5 @@ function draw() {
 
 function windowResized(){
   resizeCanvas(windowWidth*0.7, (windowWidth*0.7)*3/4);
+  paper_img.resize(windowWidth*0.7, (windowWidth*0.7)*3/4);
 }

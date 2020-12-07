@@ -17,6 +17,9 @@ def send_static(path):
 def send_assets(path):
     return send_from_directory('assets', path)
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('assets', 'favicon.ico')
 # @app.route('/<path:path>')
 # def send_from_base(path):
 #     return send_from_directory('/', path)

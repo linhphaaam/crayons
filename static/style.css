@@ -107,6 +107,8 @@ header {
     display: flex;
     flex: 0 0 50%;
     -webkit-mask-image: url(../assets/mask_img.png);
+    -webkit-mask-size: 97%;
+    -webkit-mask-repeat: no-repeat;
     /* mask-image: linear-gradient(to bottom, transparent 25%, black 75%); */
 }
 
