@@ -2,7 +2,7 @@
     background-color: rgb(24,20,17);
     color: rgb(224,220,217);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    padding: 50px;
+    padding: 25px 50px 50px 50px;
 }
 
 button {
@@ -15,6 +15,10 @@ button {
     font-size: 24px;
     position: relative;
     color: rgb(224,220,217);
+}
+
+a {
+    color: yellow;
 }
 
 
@@ -51,8 +55,9 @@ p {
 }
 
 h1 {
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 600;
+    color: yellow;
 }
 
 
@@ -77,6 +82,7 @@ label {
 
 header {
     margin-bottom: 20px;
+
 }
 
 #threshold {
@@ -100,18 +106,20 @@ header {
 #canvasHolder {
     display: flex;
     flex: 0 0 50%;
+    -webkit-mask-image: url(../assets/mask_img.png);
+    /* mask-image: linear-gradient(to bottom, transparent 25%, black 75%); */
 }
 
 .controls {
     display: inline-block;
     width: 20%;
-    min-width: 300px;
+    min-width: 320px;
     
     /* background-color: rgb(250, 235, 215, 0.1); */
 }
 
 .controls > div {
-    padding: 5px 20px 15px 20px;
+    padding: 0px 20px 15px 20px;
     margin-bottom: 10px;
     border-radius: 5px;
     border: solid 0.5px rgba(255, 255, 255, 0.5);

@@ -10,6 +10,7 @@
 <script src={{ url_for('send_static', path='p5.speech.js') }}></script>
 <script src={{ url_for('send_assets', path='rock.jpg') }}></script>
 <script src={{ url_for('send_assets', path='paper_texture.png') }}></script>
+<script src={{ url_for('send_assets', path='mask_img.png') }}></script>
 <script src={{ url_for('send_static', path='cv.data') }}></script>
 <script src={{ url_for('send_static', path='shader.vert') }}></script>
 <script src={{ url_for('send_static', path='shader.frag') }}></script>
@@ -41,14 +42,18 @@
 <div class="container"></div>
     <body id="screen">
         <header>
-            <h1>
+            <!-- <h1>
             CRAYONS 🖍️
-            </h1>
-            <p>Please enable camera and microphone to start sketching.</p>
+            </h1> -->
         </header>
         <div class=flex-container>
-            <div class="controls">   
-            <!-- <p>Blur Radius: <input type="range" id="blurRadius" value="50"></p> -->
+            
+            <!-- <p>Please enable camera and microphone to start sketching.</p> -->
+            <div class="controls">  
+                <h1>CRAYONS 🖍️</h1>
+                <br>
+                <p>Please enable camera and microphone to start sketching.</p>
+                <br>
                 <div id="threshold_control">
                     <h2>Threshold</h2>
                     <input type="range" id="threshold" value="35">
@@ -93,5 +98,8 @@
         </div>
         </div>
     </body>
+    <footer>
+        <p>Made by <a href="https://www.linhphaaam.com">Linh Pham</a> with &lt;3 </p>
+    </footer>
 </div>
 {% endblock content %}

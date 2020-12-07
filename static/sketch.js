@@ -266,7 +266,7 @@ function draw() {
 
   contour_img.blendMode(OVERLAY);
   contour_img.background(paper_img);
-  contour_img.blendMode(NORMAL);
+  contour_img.blendMode(BLEND);
 
   shader(theShader);
   
