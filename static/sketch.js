@@ -4,6 +4,7 @@ let theShader;
 let capture;
 let rock_img;
 let contour_img;
+let paper_img;
 
 let speechRec;
 let lang;
@@ -25,6 +26,8 @@ function preload(){
   // load the shader
   theShader = loadShader('static/shader.vert', 'static/shader.frag');
   rock_img = loadImage('assets/rock.jpg');
+  paper_img = loadImage('assets/paper_texture.png');
+  paper_img.resize(w, h);
 }
 
 function setup() {
@@ -99,7 +102,11 @@ function hexToRGB(h) {
 
 function draw() {  
   speechRec.onEnd = restart;
-  contour_img.background(24,20,17);
+  // contour_img.background(paper_img);
+  // contour_img.background(255, 255, 255, 0);
+  // contour_img.blendMode(HARD_LIGHT);
+  contour_img.background('rgba(24,20,17, 1)');
+  // contour_img.blendMode(NORMAL);
   // get outline color selections
   var outline_color_colorful = document.getElementById("colorful_outline").checked;
   var outline_color_black = document.getElementById("black_outline").checked;
@@ -140,8 +147,15 @@ function draw() {
   
   if (color_picked) {
     // body.style.backgroundColor = color_picker.value;
+    // contour_img.blendMode(HARD_LIGHT);
     contour_img.background(color_picker.value);
+    // contour_img.blendMode(NORMAL);
   }
+
+
+  // contour_img.blendMode(OVERLAY);
+  // contour_img.background(paper_img);
+  // contour_img.blendMode(NORMAL);
 
 
   if (cvReady()) {
@@ -249,7 +263,10 @@ function draw() {
     contour_img.stroke(random_col);
     contour_img.text(speech_history[i].toUpperCase(), random(5/6*w), random(3/4*h), 300, 400);
   }
- 
+
+  contour_img.blendMode(OVERLAY);
+  contour_img.background(paper_img);
+  contour_img.blendMode(NORMAL);
 
   shader(theShader);
   
@@ -262,6 +279,7 @@ function draw() {
 
   // rect gives us some geometry on the screen
   rect(0,0, w, h);
+
 }
 
 function windowResized(){
