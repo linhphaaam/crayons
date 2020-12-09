@@ -15,6 +15,7 @@
 <script src={{ url_for('send_static', path='shader.vert') }}></script>
 <script src={{ url_for('send_static', path='shader.frag') }}></script>
 <link rel="stylesheet" href={{ url_for('send_static', path='style.css') }}>
+<link rel="shortcut icon" href={{ url_for('send_assets', path='favicon.ico') }}>
 <!-- <script src={{ url_for('send_static', path='sketch.js') }}></script> -->
 <!-- <p class="opencv_status">OpenCV Status: <span class="opencv_status" id="status">Loading OpenCV...</span></p> -->
     <script>
@@ -36,15 +37,21 @@
           }
       };
   </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3H2M5HYF1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-D3H2M5HYF1');
+    </script>
 {% endblock head %}
 
 {% block content %}
 <div class="container"></div>
     <body id="screen">
         <header>
-            <!-- <h1>
-            CRAYONS 🖍️
-            </h1> -->
         </header>
         <div class=flex-container>
             
